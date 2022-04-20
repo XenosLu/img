@@ -1,4 +1,4 @@
-FROM  python:3.8.13-alpine3.15 as base
+FROM python:3.8.13-alpine3.15 as base
 
 RUN apk add --no-cache \
             build-base \
@@ -60,7 +60,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
     chmod +x ./kubectl &&\
     mv ./kubectl /usr/local/bin/kubectl
 
-COPY --from=xenocider/image:lrzsz-musl /lrzsz-musl-0.12.20.tar /lrzsz-musl-0.12.20.tar
+COPY --from=xenocider/img:lrzsz-musl /lrzsz-musl-0.12.20.tar /lrzsz-musl-0.12.20.tar
 RUN tar -C / -xvf /lrzsz-musl-0.12.20.tar &&\
     rm /lrzsz-musl-0.12.20.tar &&\
     ln -s /usr/local/bin/lrz /usr/bin/rz &&\
