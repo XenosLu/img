@@ -4,7 +4,7 @@ cd /d %current%
 
 echo # Images > README.md
 for /f %%i in ('dir /a:d-h /b') do call :MAIN %%i >> README.md
-pause
+timeout 3
 goto :EOF
 
 ::https://hub.docker.com/_/python?tab=description
