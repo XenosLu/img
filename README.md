@@ -1,8 +1,12 @@
 # Images 
+- xenocider/img:bypy
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:bypy
 - xenocider/img:debian-uam
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:debian-uam
 - xenocider/img:jupyter
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:jupyter
+- xenocider/img:kodi
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:kodi
 - xenocider/img:lrzsz-musl
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:lrzsz-musl
 - xenocider/img:mldonkey
