@@ -1,7 +1,5 @@
 #!/bin/sh
-# echo "$URL"
 cd $(mktemp -d)
-
 
 python3 -m xenoslib.onedrive login $*
 
