@@ -1,0 +1,11 @@
+# Images 
+- xenocider/img:debian-uam
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:debian-uam
+- xenocider/img:jupyter
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:jupyter
+- xenocider/img:mldonkey
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:mldonkey
+- xenocider/img:ubuntu-uam-test
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:ubuntu-uam-test
+- xenocider/img:workspace
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:workspace

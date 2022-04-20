@@ -1,0 +1,53 @@
+name: build docker images
+
+on:
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+    secrets:
+      DOCKERHUB_TOKEN:
+        required: true
+
+jobs:
+
+  get_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - id: set-matrix
+        run: echo ::set-output name=matrix::{\"include\":[$(git diff-tree HEAD HEAD~1 --name-only | awk '{printf "{\"tag\":\"%s\"},", $1}')]}
+
+  build:
+    needs: get_matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(needs.get_matrix.outputs.matrix) }}
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+      - name: 'Build folder: ${{ matrix.tag }}'
+        env: 
+          registry: registry.cn-shanghai.aliyuncs.com
+        run: |
+          ls -al
+          if [ ! -f ${{ matrix.tag }}/Dockerfile ];then echo exit;exit 0; fi
+          IMAGE_NAME=${{ inputs.username }}/${GITHUB_REPOSITORY##*/}:${{ matrix.tag }}
+          echo "::set-output name=image::$IMAGE_NAME"
+          echo "$IMAGE_NAME"
+          docker build -t ${IMAGE_NAME} ${{ matrix.tag }}
+          docker tag ${IMAGE_NAME} ${{ env.registry }}/${IMAGE_NAME}
+          pass=${{ secrets.DOCKERHUB_TOKEN }}
+          docker login -u ${{ inputs.username }} -p ${pass}
+          docker push ${IMAGE_NAME} && docker logout &
+          docker login -u ${{ inputs.username }} -p ${pass::-4} ${{ env.registry }}
+          docker push ${{ env.registry }}/${IMAGE_NAME} || \
+          docker push ${{ env.registry }}/${IMAGE_NAME}
+          docker logout ${{ env.registry }}
+          fg || echo

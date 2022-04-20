@@ -1,0 +1,22 @@
+name: Auto Build Docker
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches-ignore: [master]
+    paths-ignore:
+      - README.md
+      - .github/**
+      - doc.cmd
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    uses: XenosLu/img/.github/workflows/build.yml@main
+    with:
+      username: xenocider
+    secrets:
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
