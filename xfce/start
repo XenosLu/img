@@ -1,0 +1,11 @@
+#!/bin/sh
+test -f /var/run/dbus/pid && rm /var/run/dbus/pid
+
+mkdir -p /root/.config/fcitx
+echo [Hotkey] > /root/.config/fcitx/config
+echo TriggerKey=CTRL_ALT_SPACE >> /root/.config/fcitx/config
+echo SwitchKey=Disabled >> /root/.config/fcitx/config
+echo IMSwitchKey=False >> /root/.config/fcitx/config
+
+/usr/bin/dbus-daemon --system
+/usr/sbin/sshd -D -E /var/log/sshd
