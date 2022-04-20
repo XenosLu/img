@@ -5,6 +5,8 @@
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:debian-uam
 - xenocider/img:jupyter
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:jupyter
+- xenocider/img:jupyter-wheel
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:jupyter-wheel
 - xenocider/img:kodi
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:kodi
 - xenocider/img:lrzsz-musl
@@ -13,8 +15,6 @@
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:mldonkey
 - xenocider/img:one
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:one
-- xenocider/img:ubuntu-uam-test
-- registry.cn-shanghai.aliyuncs.com/xenocider/img:ubuntu-uam-test
 - xenocider/img:wheel-jupyterlab
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:wheel-jupyterlab
 - xenocider/img:wheel-pandas
