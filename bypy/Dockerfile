@@ -1,5 +1,5 @@
 ## bypy 1.6.6+
-python:3.8.13-alpine3.15
+FROM python:3.8.13-alpine3.15
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
 
