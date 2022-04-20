@@ -13,7 +13,6 @@ ENV MLDONKEY_DIR /var/lib/mldonkey
 # VOLUME ["/var/lib/mldonkey", "/mnt/mldonkey_tmp", "/mnt/mldonkey_completed"]
 VOLUME ["/var/lib/mldonkey"]
 
-
 EXPOSE 4000 4080 20562 20566/udp 6209 6209/udp 16965/udp 3617/udp 6882 6883
 
 COPY start.sh /start.sh

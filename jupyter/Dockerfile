@@ -1,4 +1,3 @@
-### xenocider/container:jupyter ###
 FROM  python:3.8.13-alpine3.15 as base
 
 RUN apk add --no-cache \
@@ -47,7 +46,6 @@ RUN apk add --no-cache \
             nodejs \
             yarn &&\
     rm -rf /root/.cache
-
 
 RUN ssh-keygen -A && \
     echo "root:$RANDOM" | chpasswd &&\
