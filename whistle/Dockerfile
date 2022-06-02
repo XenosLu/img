@@ -16,5 +16,8 @@ RUN apk add --no-cache \
 
 RUN yarn global add whistle
 
+ADD start /
+
 EXPOSE 8899
-CMD ["w2", "start", "&&", "sleep", "infinity"]
+# CMD ["w2", "start", "&&", "sleep", "infinity"]
+CMD ["/bin/sh", "/start"]
