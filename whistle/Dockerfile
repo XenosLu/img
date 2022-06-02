@@ -14,7 +14,7 @@ RUN apk add --no-cache \
             yarn &&\
     rm -rf /root/.cache
 
-
+RUN yarn global add whistle
 
 EXPOSE 8899
-CMD ["/bin/sh"]
+CMD ["w2", "start", "&&", "sleep", "infinity"]
