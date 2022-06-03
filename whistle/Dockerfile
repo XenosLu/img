@@ -17,7 +17,6 @@ RUN apk add --no-cache \
 RUN yarn global add whistle
 
 ADD start /
-ADD reqScript.js /root
 
 EXPOSE 8899
 # CMD ["w2", "start", "&&", "sleep", "infinity"]
