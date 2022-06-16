@@ -14,12 +14,14 @@ RUN apk add --no-cache \
             yarn &&\
     apk add --no-cache \
             nginx &&\
+    rm -f /etc/nginx/http.d/default.conf &&\
     rm -rf /root/.cache
 
 RUN yarn global add whistle
 
 ADD start /
 ADD nginx.conf /
+ADD wpad /
 
 EXPOSE 8899
 EXPOSE 8898
