@@ -21,7 +21,7 @@ after the configuration options for additional warnings and tips information.
  */
 
 //Enables console logging (true/false, default true)
-var ENABLE_LOGGING = true;
+var ENABLE_LOGGING = false;
 
 //Enable friendly excludes (true/false, default true)
 //If a request matches an exclude then it will create a direct connection rather than proxy
@@ -107,15 +107,43 @@ function include(source, rules) {
 
 //Initialization Function
 function FindProxyForURL(url, host) {
+    if (!ENABLE_EXCLUDES)
+        return "DIRECT";
     //These are my personal excludes just in case I accidently go to a login site with this proxy enabled
-    if (ENABLE_EXCLUDES) {
-        domain_includes = [
-            "local.whistlejs.com",
-            "ifconfig.me",
-            "*.bytegsdk.com",
-        ];
-    };
+    ip_excludes = [
+        "10.*", //private address range
+        "127.*", //loopback or localhost
+    ];
+    domain_includes = [
+        "local.whistlejs.com",
+        "ifconfig.me",
+        "*.bytegsdk.com",
+        "*.byteoversea.com",
+        "static.zhihu.com",
+        "burp",
+    ];
+    domain_excludes = [];
+    protocol_excludes = [
+        "about:*",
+        "aim:*",
+        "chrome:*",
+        "file:*",
+        "sftp:*",
+        "socks:*",
+        "steam:*",
+        "telnet:*"
+    ];
 
+    if (include(url.toLowerCase(), protocol_excludes)) {
+        //if(ENABLE_LOGGING)
+        //alert("Exclude rule triggered: protocol\n" + url);
+        return "DIRECT";
+    };
+    if (include(host.toLowerCase(), domain_excludes)) {
+        //if(ENABLE_LOGGING)
+        //alert("Exclude rule triggered: domain\n" + dnsResolve(host) + "\n" + host);
+        return "DIRECT";
+    };
     if (include(host.toLowerCase(), domain_includes)) {
         return "PROXY 192.168.2.150:8899";
     };
