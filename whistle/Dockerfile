@@ -12,13 +12,17 @@ RUN apk add --no-cache \
     apk add --no-cache \
             nodejs \
             yarn &&\
+    apk add --no-cache \
+            nginx &&\
     rm -rf /root/.cache
 
 RUN yarn global add whistle
 
 ADD start /
+ADD nginx.conf /
 
 EXPOSE 8899
+EXPOSE 8898
 # CMD ["w2", "start", "&&", "sleep", "infinity"]
 CMD ["w2", "run"]
 # CMD ["/bin/sh", "/start"]
