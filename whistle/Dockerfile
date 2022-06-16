@@ -14,8 +14,8 @@ RUN apk add --no-cache \
             yarn &&\
     apk add --no-cache \
             nginx &&\
-    rm -f /etc/nginx/http.d/default.conf &&\
     rm -rf /root/.cache
+#     rm -f /etc/nginx/http.d/default.conf &&\
 
 RUN yarn global add whistle
 
@@ -26,5 +26,5 @@ ADD wpad /wpad
 EXPOSE 8899
 EXPOSE 8898
 # CMD ["w2", "start", "&&", "sleep", "infinity"]
-CMD ["w2", "run"]
-# CMD ["/bin/sh", "/start"]
+# CMD ["w2", "run"]
+CMD ["/bin/sh", "/start"]
