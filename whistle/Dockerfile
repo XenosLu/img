@@ -20,8 +20,8 @@ RUN apk add --no-cache \
 RUN yarn global add whistle
 
 ADD start /
-ADD nginx.conf /
-ADD wpad /
+ADD nginx.conf /etc/nginx/http.d/
+ADD wpad /wpad
 
 EXPOSE 8899
 EXPOSE 8898
