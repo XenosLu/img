@@ -120,6 +120,8 @@ function FindProxyForURL(url, host) {
         "*.bytegsdk.com",
         "*.byteoversea.com",
         "static.zhihu.com",
+        "*.wxs.qq.com",
+        "mp.weixin.qq.com",
         "burp",
     ];
     domain_excludes = [];
