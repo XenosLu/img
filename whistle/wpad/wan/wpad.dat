@@ -113,6 +113,11 @@ function FindProxyForURL(url, host) {
             "local.whistlejs.com",
             "ifconfig.me",
             "*.bytegsdk.com",
+            "*.byteoversea.com",
+            "static.zhihu.com",
+            "*.wxs.qq.com",
+            "mp.weixin.qq.com",
+            "burp",
         ];
     };
 
