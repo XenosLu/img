@@ -114,16 +114,30 @@ function FindProxyForURL(url, host) {
         "10.*", //private address range
         "127.*", //loopback or localhost
     ];
-    domain_includes = [
-        "local.whistlejs.com",
-        "ifconfig.me",
-        "*.bytegsdk.com",
-        "*.byteoversea.com",
-        "static.zhihu.com",
-        "*.wxs.qq.com",
-        "mp.weixin.qq.com",
-        "burp",
-    ];
+        domain_includes = [
+            "local.whistlejs.com",
+            "burp",
+            "ifconfig.me",
+            //chisennet start
+            "www.chisennet.com",
+            "e.tapdb.net",
+            //unity ad start
+            "*.unity3d.com",
+            "*.unityads.unitychina.cn",
+            "*.unity.cn",
+            //douyin ad start
+            "lf3-analytics.bytescm.com",
+            "tnc3-alisc*.snssdk.com",
+            "*.ctobsnssdk.com",
+            "*.pinduoduo.com",
+            "*.pglstatp-toutiao.com",
+            "log-api.pangolin-sdk-toutiao-b.com",
+            "*.pangolin-sdk-toutiao.com",
+            //////////////////
+            "static.zhihu.com",  //zhihu
+            "*.wxs.qq.com",  //wechat
+            "mp.weixin.qq.com",  //wechat
+        ];
     domain_excludes = [];
     protocol_excludes = [
         "about:*",
