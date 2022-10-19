@@ -30,6 +30,7 @@ def init_log_console():
         datefmt='%Y-%m-%d %H:%M:%S',
     )
 
+
 def parse(content):
     for line in content.split('\n'):
         line = line.strip().strip('^')
@@ -38,16 +39,17 @@ def parse(content):
         if not line:
             continue
         line = line.split(' ')[0]
-        
+
         if not line.startswith('http'):
             line = f'http://{line}'
         from urllib.parse import urlparse
+
         result = urlparse(line, scheme='http')
         yield f'            "{result.netloc}",'
 
+
 def handle(content):
     return '\n'.join(sorted(set(parse(content))))
-
 
 
 def main():
