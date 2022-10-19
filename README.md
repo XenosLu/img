@@ -19,6 +19,8 @@
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:wheel-jupyterlab
 - xenocider/img:wheel-pandas
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:wheel-pandas
+- xenocider/img:whistle
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:whistle
 - xenocider/img:workspace
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:workspace
 - xenocider/img:xfce

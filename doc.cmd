@@ -11,6 +11,7 @@ goto :EOF
 
 :MAIN
 if "%1"==".github" goto :EOF
+if "%1"==".git" goto :EOF
 echo - xenocider/img:%1
 echo - registry.cn-shanghai.aliyuncs.com/xenocider/img:%1
 goto :EOF
