@@ -26,7 +26,7 @@ var ENABLE_LOGGING = true;
 //Enable friendly excludes (true/false, default true)
 //If a request matches an exclude then it will create a direct connection rather than proxy
 //This option must be disabled for user defined excludes to work
-var ENABLE_EXCLUDES = true;
+var ENABLE_INCLUDES = true;
 
 /*
  * End of Configuration Options
@@ -105,57 +105,56 @@ function include(source, rules) {
     }
 }
 
+var DOMAIN_INCLUDES = [
+    "local.whistlejs.com",
+    "burp",
+    "ifconfig.me",
+    //chisennet start
+    "adim.pinduoduo.com",
+    "api-access.pangolin-sdk-toutiao.com",
+    "api-fc.dutils.com",
+    "api.applink.mob.com",
+    "api.share.mob.com",
+    "auction.unityads.unity.cn",
+    "auiopt.unityads.unity3d.com",
+    "cdn-creatives-tencent-prd.unityads.unitychina.cn",
+    "cdp.cloud.unity.cn",
+    "cdp.cloud.unity3d.com",
+    "check.unity.cn",
+    "config.uca.cloud.unity3d.com",
+    "config.unityads.unitychina.cn",
+    "e.tapdb.net",
+    "ether-pack.pangolin-sdk-toutiao.com",
+    "events.mz.unity3d.com",
+    "httpkafka.unityads.unity3d.com",
+    "images.pinduoduo.com",
+    "lf3-analytics.bytescm.com",
+    "log-api.pangolin-sdk-toutiao-b.com",
+    "p*-be-pack-sign.pglstatp-toutiao.com",
+    "publisher-config.unityads.unity.cn",
+    "publisher-event.unityads.unity3d.com",
+    "sf3-fe-tos.pglstatp-toutiao.com",
+    "tnc3-aliec2.snssdk.com",
+    "tnc3-alisc1.snssdk.com",
+    "tobapplog.ctobsnssdk.com",
+    "toblog.ctobsnssdk.com",
+    "v*-be-pack.pglstatp-toutiao.com",
+    "video-dsp.pddpic.com",
+    "www.chisennet.com",
+    //////////////////
+    "static.zhihu.com", //zhihu
+    "*.wxs.qq.com", //wechat
+    "mp.weixin.qq.com", //wechat
+];
+
 //Initialization Function
 function FindProxyForURL(url, host) {
     //These are my personal excludes just in case I accidently go to a login site with this proxy enabled
-    if (ENABLE_EXCLUDES) {
-        domain_includes = [
-            "local.whistlejs.com",
-            "burp",
-            "ifconfig.me",
-            //chisennet start
-            "adim.pinduoduo.com",
-            "api-access.pangolin-sdk-toutiao.com",
-            "api-fc.dutils.com",
-            "api.applink.mob.com",
-            "api.share.mob.com",
-            "auction.unityads.unity.cn",
-            "auiopt.unityads.unity3d.com",
-            "cdn-creatives-tencent-prd.unityads.unitychina.cn",
-            "cdp.cloud.unity.cn",
-            "cdp.cloud.unity3d.com",
-            "check.unity.cn",
-            "config.uca.cloud.unity3d.com",
-            "config.unityads.unitychina.cn",
-            "e.tapdb.net",
-            "ether-pack.pangolin-sdk-toutiao.com",
-            "events.mz.unity3d.com",
-            "httpkafka.unityads.unity3d.com",
-            "images.pinduoduo.com",
-            "lf3-analytics.bytescm.com",
-            "log-api.pangolin-sdk-toutiao-b.com",
-            "p*-be-pack-sign.pglstatp-toutiao.com",
-            "publisher-config.unityads.unity.cn",
-            "publisher-event.unityads.unity3d.com",
-            "sf3-fe-tos.pglstatp-toutiao.com",
-            "tnc3-aliec2.snssdk.com",
-            "tnc3-alisc1.snssdk.com",
-            "tobapplog.ctobsnssdk.com",
-            "toblog.ctobsnssdk.com",
-            "v*-be-pack.pglstatp-toutiao.com",
-            "video-dsp.pddpic.com",
-            "www.chisennet.com",
-            //////////////////
-            "static.zhihu.com", //zhihu
-            "*.wxs.qq.com", //wechat
-            "mp.weixin.qq.com", //wechat
-        ];
-    };
     if (!isInNet(myIpAddress(), "192.168.2.0", "255.255.255.0") && shExpMatch(host, "192.168.2.*")) {
         return "PROXY xenos.nsupdate.info:8899";
     }
-    if (include(host.toLowerCase(), domain_includes)) {
+    if (ENABLE_INCLUDES && include(host.toLowerCase(), DOMAIN_INCLUDES)) {
         return "PROXY xenos.nsupdate.info:8899";
     };
-    return "DIRECT; PROXY xenos.nsupdate.info:8899";
+    return "DIRECT";
 }
