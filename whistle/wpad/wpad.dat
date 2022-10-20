@@ -21,12 +21,12 @@ after the configuration options for additional warnings and tips information.
  */
 
 //Enables console logging (true/false, default true)
-var ENABLE_LOGGING = false;
+var ENABLE_LOGGING = true;
 
 //Enable friendly excludes (true/false, default true)
 //If a request matches an exclude then it will create a direct connection rather than proxy
 //This option must be disabled for user defined excludes to work
-var ENABLE_EXCLUDES = true;
+var ENABLE_INCLUDES = true;
 
 /*
  * End of Configuration Options
@@ -105,80 +105,83 @@ function include(source, rules) {
     }
 }
 
+var PROTOCOL_EXCLUDES = [
+    "about:*",
+    "aim:*",
+    "chrome:*",
+    "file:*",
+    "sftp:*",
+    "socks:*",
+    "steam:*",
+    "telnet:*"
+];
+var IP_EXCLUDES = [
+    "10.*", //private address range
+    "127.*", //loopback or localhost
+];
+
+var DOMAIN_INCLUDES = [
+    "local.whistlejs.com",
+    "burp",
+    "ifconfig.me",
+    //chisennet start
+    "adim.pinduoduo.com",
+    "api-access.pangolin-sdk-toutiao.com",
+    "api-fc.dutils.com",
+    "api.applink.mob.com",
+    "api.share.mob.com",
+    "auction.unityads.unity.cn",
+    "auiopt.unityads.unity3d.com",
+    "cdn-creatives-tencent-prd.unityads.unitychina.cn",
+    "cdp.cloud.unity.cn",
+    "cdp.cloud.unity3d.com",
+    "check.unity.cn",
+    "config.uca.cloud.unity3d.com",
+    "config.unityads.unitychina.cn",
+    "e.tapdb.net",
+    "ether-pack.pangolin-sdk-toutiao.com",
+    "events.mz.unity3d.com",
+    "httpkafka.unityads.unity3d.com",
+    "images.pinduoduo.com",
+    "lf3-analytics.bytescm.com",
+    "log-api.pangolin-sdk-toutiao-b.com",
+    "p*-be-pack-sign.pglstatp-toutiao.com",
+    "publisher-config.unityads.unity.cn",
+    "publisher-event.unityads.unity3d.com",
+    "sf3-fe-tos.pglstatp-toutiao.com",
+    "tnc3-aliec2.snssdk.com",
+    "tnc3-alisc1.snssdk.com",
+    "tobapplog.ctobsnssdk.com",
+    "toblog.ctobsnssdk.com",
+    "v*-be-pack.pglstatp-toutiao.com",
+    "video-dsp.pddpic.com",
+    "www.chisennet.com",
+    //////////////////
+    "static.zhihu.com", //zhihu
+    "*.wxs.qq.com", //wechat
+    "mp.weixin.qq.com", //wechat
+    //////////////////////////
+    //generate start
+    //generate end
+];
+
 //Initialization Function
 function FindProxyForURL(url, host) {
-    if (!ENABLE_EXCLUDES)
-        return "DIRECT";
     //These are my personal excludes just in case I accidently go to a login site with this proxy enabled
-    ip_excludes = [
-        "10.*", //private address range
-        "127.*", //loopback or localhost
-    ];
-    domain_includes = [
-        "local.whistlejs.com",
-        "burp",
-        "ifconfig.me",
-        //chisennet start
-        "adim.pinduoduo.com",
-        "api-access.pangolin-sdk-toutiao.com",
-        "api-fc.dutils.com",
-        "api.applink.mob.com",
-        "api.share.mob.com",
-        "auction.unityads.unity.cn",
-        "auiopt.unityads.unity3d.com",
-        "cdn-creatives-tencent-prd.unityads.unitychina.cn",
-        "cdp.cloud.unity.cn",
-        "cdp.cloud.unity3d.com",
-        "check.unity.cn",
-        "config.uca.cloud.unity3d.com",
-        "config.unityads.unitychina.cn",
-        "e.tapdb.net",
-        "ether-pack.pangolin-sdk-toutiao.com",
-        "events.mz.unity3d.com",
-        "httpkafka.unityads.unity3d.com",
-        "images.pinduoduo.com",
-        "lf3-analytics.bytescm.com",
-        "log-api.pangolin-sdk-toutiao-b.com",
-        "p*-be-pack-sign.pglstatp-toutiao.com",
-        "publisher-config.unityads.unity.cn",
-        "publisher-event.unityads.unity3d.com",
-        "sf3-fe-tos.pglstatp-toutiao.com",
-        "tnc3-aliec2.snssdk.com",
-        "tnc3-alisc1.snssdk.com",
-        "tobapplog.ctobsnssdk.com",
-        "toblog.ctobsnssdk.com",
-        "v*-be-pack.pglstatp-toutiao.com",
-        "video-dsp.pddpic.com",
-        "www.chisennet.com",
-        //////////////////
-        "static.zhihu.com", //zhihu
-        "*.wxs.qq.com", //wechat
-        "mp.weixin.qq.com", //wechat
-    ];
-    domain_excludes = [];
-    protocol_excludes = [
-        "about:*",
-        "aim:*",
-        "chrome:*",
-        "file:*",
-        "sftp:*",
-        "socks:*",
-        "steam:*",
-        "telnet:*"
-    ];
 
-    if (include(url.toLowerCase(), protocol_excludes)) {
-        //if(ENABLE_LOGGING)
-        //alert("Exclude rule triggered: protocol\n" + url);
+    if (include(url.toLowerCase(), PROTOCOL_EXCLUDES)) {
         return "DIRECT";
     };
-    if (include(host.toLowerCase(), domain_excludes)) {
-        //if(ENABLE_LOGGING)
-        //alert("Exclude rule triggered: domain\n" + dnsResolve(host) + "\n" + host);
+    if (include(dnsResolve(host), IP_EXCLUDES)) {
         return "DIRECT";
     };
-    if (include(host.toLowerCase(), domain_includes)) {
-        return "PROXY 192.168.2.150:8899";
+    var proxy = "PROXY xenos.nsupdate.info:8899";
+    if (isInNet(myIpAddress(), "192.168.2.0", "255.255.255.0"))
+        proxy = "PROXY 192.168.2.150:8899";
+    else if (shExpMatch(host, "192.168.2.*"))
+        return proxy;
+    if (ENABLE_INCLUDES && include(host.toLowerCase(), DOMAIN_INCLUDES)) {
+        return proxy;
     };
     return "DIRECT";
 }
