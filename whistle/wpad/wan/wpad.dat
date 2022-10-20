@@ -146,9 +146,9 @@ function FindProxyForURL(url, host) {
             "video-dsp.pddpic.com",
             "www.chisennet.com",
             //////////////////
-            "static.zhihu.com",  //zhihu
-            "*.wxs.qq.com",  //wechat
-            "mp.weixin.qq.com",  //wechat
+            "static.zhihu.com", //zhihu
+            "*.wxs.qq.com", //wechat
+            "mp.weixin.qq.com", //wechat
             "192.168.2.150",
             "192.168.2.*",
         ];
