@@ -145,6 +145,9 @@ var DOMAIN_INCLUDES = [
     "static.zhihu.com", //zhihu
     "*.wxs.qq.com", //wechat
     "mp.weixin.qq.com", //wechat
+    //////////////////////////
+    //generate start
+    //generate end
 ];
 
 //Initialization Function
