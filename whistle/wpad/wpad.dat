@@ -187,13 +187,11 @@ var DOMAIN_INCLUDES = [
     "wxsnsdythumb.wxs.qq.com",
     "xlog.byteoversea.com",
     "yuudnn.lz-qs.com:9220",
-//generate end
+    //generate end
 ];
 
 //Initialization Function
 function FindProxyForURL(url, host) {
-    //These are my personal excludes just in case I accidently go to a login site with this proxy enabled
-
     if (include(url.toLowerCase(), PROTOCOL_EXCLUDES)) {
         return "DIRECT";
     };
