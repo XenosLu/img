@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 import os
 import logging
+import re
+import glob
+import json
 
 # Set file path as current path
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -45,7 +48,7 @@ def parse(content):
         from urllib.parse import urlparse
 
         result = urlparse(line, scheme='http')
-        yield f'            "{result.netloc}",'
+        yield f'    "{result.netloc}",'
 
 
 def handle(content):
@@ -53,7 +56,6 @@ def handle(content):
 
 
 def main():
-    # logger.info(os.path.dirname(os.path.abspath(__file__)))
     with open('list.txt') as r:
         content = r.read()
         new_content = handle(content)
@@ -61,6 +63,39 @@ def main():
             w.write(new_content)
 
 
+def parser(data):
+    for k, v in data.items():
+        yield from parse(v)
+
+
+def new_handle(data):
+    return '\n'.join(sorted(set(parser(data))))
+
+
+def new_main():
+    for filepath in glob.iglob('rules*.txt'):
+        print(f'reading from {filepath}')
+        with open(filepath, encoding='utf-8') as r:
+            data = json.load(r)
+            new_content = new_handle(data)
+            generate(new_content)
+
+def generate(new_content):
+
+    with open('wpad.dat') as r:
+        content = r.read()
+        content = re.sub(
+            "//generate start[\\s\\S]*//generate end",
+            f'//generate start\n{new_content}\n//generate end',
+            content,
+        )
+        print(content)
+        with open('wpad.dat', 'w') as w:
+            w.write(content)
+
+
 if __name__ == '__main__':
     init_log_console()
-    main()
+    # main()
+    new_main()
+    # test()

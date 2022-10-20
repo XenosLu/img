@@ -124,14 +124,22 @@ var DOMAIN_INCLUDES = [
     "local.whistlejs.com",
     "burp",
     "ifconfig.me",
-    //chisennet start
+    //generate start
+    "*.googleapis.com",
+    "*.pinduoduo.com",
+    "*log*.umeng.com",
+    "*log*.umengcloud.com",
     "adim.pinduoduo.com",
+    "aegis.qq.com",
     "api-access.pangolin-sdk-toutiao.com",
     "api-fc.dutils.com",
     "api.applink.mob.com",
     "api.share.mob.com",
     "auction.unityads.unity.cn",
     "auiopt.unityads.unity3d.com",
+    "bsdk*-sg.bytegsdk.com",
+    "bsdk-sg.bytegsdk.com",
+    "bsdk19-sg.bytegsdk.com",
     "cdn-creatives-tencent-prd.unityads.unitychina.cn",
     "cdp.cloud.unity.cn",
     "cdp.cloud.unity3d.com",
@@ -141,28 +149,45 @@ var DOMAIN_INCLUDES = [
     "e.tapdb.net",
     "ether-pack.pangolin-sdk-toutiao.com",
     "events.mz.unity3d.com",
+    "gplog-sg.byteoversea.com",
+    "gpm-mon-sg.bytegsdk.com",
+    "gpm-mon-sg.byteoversea.com",
+    "gsdk*-sg.bytegsdk.com",
+    "gsdk-quic-gcp-sg.bytegsdk.com",
+    "gsdk-sg.bytegsdk.com",
     "httpkafka.unityads.unity3d.com",
     "images.pinduoduo.com",
+    "ios.bugly.qq.com",
+    "ip.jsontest.com",
     "lf3-analytics.bytescm.com",
     "log-api.pangolin-sdk-toutiao-b.com",
+    "log-sg.bytegsdk.com",
+    "log15.byteoversea.com",
+    "mi.gdt.qq.com",
+    "mp.weixin.qq.com",
+    "otheve.beacon.qq.com",
     "p*-be-pack-sign.pglstatp-toutiao.com",
     "publisher-config.unityads.unity.cn",
     "publisher-event.unityads.unity3d.com",
+    "safebrowsing.urlsec.qq.com",
+    "sdk.e.qq.com",
     "sf3-fe-tos.pglstatp-toutiao.com",
+    "smr-sg.byteoversea.com",
+    "static.zhihu.com",
     "tnc3-aliec2.snssdk.com",
     "tnc3-alisc1.snssdk.com",
     "tobapplog.ctobsnssdk.com",
     "toblog.ctobsnssdk.com",
     "v*-be-pack.pglstatp-toutiao.com",
+    "vcs-sg.byteoversea.com",
     "video-dsp.pddpic.com",
+    "www.baidu.com",
     "www.chisennet.com",
-    //////////////////
-    "static.zhihu.com", //zhihu
-    "*.wxs.qq.com", //wechat
-    "mp.weixin.qq.com", //wechat
-    //////////////////////////
-    //generate start
-    //generate end
+    "wxsnsdy.wxs.qq.com",
+    "wxsnsdythumb.wxs.qq.com",
+    "xlog.byteoversea.com",
+    "yuudnn.lz-qs.com:9220",
+//generate end
 ];
 
 //Initialization Function
