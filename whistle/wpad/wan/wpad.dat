@@ -157,5 +157,5 @@ function FindProxyForURL(url, host) {
     if (include(host.toLowerCase(), domain_includes)) {
         return "PROXY xenos.nsupdate.info:8899";
     };
-    return "DIRECT";
+    return "DIRECT; PROXY xenos.nsupdate.info:8899";
 }
