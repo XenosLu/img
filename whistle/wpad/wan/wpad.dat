@@ -150,11 +150,13 @@ var DOMAIN_INCLUDES = [
 //Initialization Function
 function FindProxyForURL(url, host) {
     //These are my personal excludes just in case I accidently go to a login site with this proxy enabled
-    if (!isInNet(myIpAddress(), "192.168.2.0", "255.255.255.0") && shExpMatch(host, "192.168.2.*")) {
-        return "PROXY xenos.nsupdate.info:8899";
-    }
+    var proxy = "PROXY xenos.nsupdate.info:8899";
+    if (isInNet(myIpAddress(), "192.168.2.0", "255.255.255.0"))
+        proxy = "PROXY 192.168.2.150:8899";
+    else if (shExpMatch(host, "192.168.2.*"))
+        return proxy;
     if (ENABLE_INCLUDES && include(host.toLowerCase(), DOMAIN_INCLUDES)) {
-        return "PROXY xenos.nsupdate.info:8899";
+        return proxy;
     };
     return "DIRECT";
 }
