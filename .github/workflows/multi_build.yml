@@ -1,0 +1,139 @@
+name: build docker image
+
+on:
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+
+  env:
+    runs-on: ubuntu-latest
+    name: Generate env
+    outputs: 
+      image: ${{ steps.env.outputs.image }}
+
+    steps:
+      - name: Get env
+        run: |
+          [ "${GITHUB_REF##*/}" == "master" ] || [ "${GITHUB_REF##*/}" == "main" ] && TAG=latest || TAG=${GITHUB_REF##*/}
+          IMAGE_NAME=${{ inputs.username }}/${GITHUB_REPOSITORY##*/}
+          echo "image=$IMAGE_NAME:${TAG}" >> $GITHUB_OUTPUT
+        id: env
+
+  buildname:
+    needs: env
+    name: ${{ needs.env.outputs.image }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: placeholder
+        run: echo placeholder
+
+  build:
+    name: DH
+    needs: env
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.image != '' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - ''
+          - python:3.6-alpine
+          - python:3.7-alpine
+          - python:3.8-alpine
+          - python:3.9-alpine
+          - python:3.10-alpine
+          - python:3.11-rc-alpine
+          - python:3.6-slim
+          - python:3.7-slim
+          - python:3.8-slim
+          - python:3.9-slim
+          - python:3.10-slim
+          - python:3.11-rc-slim
+    
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+      - name: Build modify FROM to ${{ matrix.image }}
+        run: |
+          sed -i "s/^\(FROM \) *[^ ]*\( as base\)\?/\1${{ matrix.image }}\2/g" Dockerfile
+          cat Dockerfile
+        if: ${{ matrix.image }}
+      - name: Fix image name
+        id: image
+        run: |
+          AFFIX=${{ matrix.image }}
+          [ "$AFFIX" == "" ] || AFFIX=-${AFFIX/:/}
+          echo "name=${{ needs.env.outputs.image }}$AFFIX" >> $GITHUB_OUTPUT
+      - name: Build image ${{ needs.env.outputs.image }}
+        env:
+          image: ${{ steps.image.outputs.name}}
+        run: docker build -t ${{ env.image }} .
+      - name: Push image ${{ env.image }} to Docker Hub
+        env:
+          image: ${{ steps.image.outputs.name}}
+        run: |
+          pass=${{ secrets.token }}
+          docker login -u ${{ inputs.username }} -p ${pass}
+          docker push ${{ env.image }}
+          docker logout
+      - run: docker images
+
+  build-acr:
+    name: ACR
+    needs: env
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.image != '' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - ''
+          - python:3.6-alpine
+          - python:3.7-alpine
+          - python:3.8-alpine
+          - python:3.9-alpine
+          - python:3.10-alpine
+          - python:3.11-rc-alpine
+          - python:3.6-slim
+          - python:3.7-slim
+          - python:3.8-slim
+          - python:3.9-slim
+          - python:3.10-slim
+          - python:3.11-rc-slim
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+      - name: Build modify FROM to ${{ matrix.image }}
+        run: |
+          sed -i "s/^\(FROM \) *[^ ]*\( as base\)\?/\1${{ matrix.image }}\2/g" Dockerfile
+          cat Dockerfile
+        if: ${{ matrix.image }}
+      - name: Fix image name
+        id: image
+        run: |
+          AFFIX=${{ matrix.image }}
+          [ "$AFFIX" == "" ] || AFFIX=-${AFFIX/:/}
+          echo "name=registry.cn-shanghai.aliyuncs.com/${{ needs.env.outputs.image }}$AFFIX" >> $GITHUB_OUTPUT
+      - name: Build image ${{ needs.env.outputs.image }}
+        env:
+          image: ${{ steps.image.outputs.name}}
+        run: docker build -t ${{ env.image }} .
+      - name: Push image ${{ needs.env.outputs.image }} to ACR
+        env: 
+          registry: registry.cn-shanghai.aliyuncs.com
+          image: ${{ steps.image.outputs.name}}
+        run: |
+          pass=${{ secrets.token }}
+          docker login -u ${{ inputs.username }} -p ${pass::-4} ${{ env.registry }}
+          docker push ${{ env.image }} || \
+          docker push ${{ env.image }}
+          docker logout ${{ env.registry }}
+      - run: docker images
