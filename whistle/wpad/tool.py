@@ -51,37 +51,16 @@ def parse(content):
         yield f'    "{result.netloc}",'
 
 
-def handle(content):
-    return '\n'.join(sorted(set(parse(content))))
-
-
-def main():
-    with open('list.txt') as r:
-        content = r.read()
-        new_content = handle(content)
-        with open('result.txt', 'w') as w:
-            w.write(new_content)
-
-
 def parser(data):
     for k, v in data.items():
         yield from parse(v)
 
 
-def new_handle(data):
+def handle(data):
     return '\n'.join(sorted(set(parser(data))))
 
 
-def new_main():
-    for filepath in glob.iglob('rules*.txt'):
-        print(f'reading from {filepath}')
-        with open(filepath, encoding='utf-8') as r:
-            data = json.load(r)
-            new_content = new_handle(data)
-            generate(new_content)
-
 def generate(new_content):
-
     with open('wpad.dat') as r:
         content = r.read()
         content = re.sub(
@@ -94,8 +73,15 @@ def generate(new_content):
             w.write(content)
 
 
+def main():
+    for filepath in glob.iglob('rules*.txt'):
+        print(f'reading from {filepath}')
+        with open(filepath, encoding='utf-8') as r:
+            data = json.load(r)
+            new_content = handle(data)
+            generate(new_content)
+
+
 if __name__ == '__main__':
     init_log_console()
-    # main()
-    new_main()
-    # test()
+    main()
