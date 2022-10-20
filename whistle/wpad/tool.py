@@ -65,17 +65,16 @@ def generate(new_content):
         content = r.read()
         content = re.sub(
             "//generate start[\\s\\S]*//generate end",
-            f'//generate start\n{new_content}\n//generate end',
+            f'//generate start\n{new_content}\n    //generate end',
             content,
         )
-        print(content)
         with open('wpad.dat', 'w') as w:
             w.write(content)
 
 
 def main():
     for filepath in glob.iglob('rules*.txt'):
-        print(f'reading from {filepath}')
+        logger.info(f'reading from {filepath}')
         with open(filepath, encoding='utf-8') as r:
             data = json.load(r)
             new_content = handle(data)
