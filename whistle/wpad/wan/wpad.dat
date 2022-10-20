@@ -105,6 +105,21 @@ function include(source, rules) {
     }
 }
 
+var PROTOCOL_EXCLUDES = [
+    "about:*",
+    "aim:*",
+    "chrome:*",
+    "file:*",
+    "sftp:*",
+    "socks:*",
+    "steam:*",
+    "telnet:*"
+];
+var IP_EXCLUDES = [
+    "10.*", //private address range
+    "127.*", //loopback or localhost
+];
+
 var DOMAIN_INCLUDES = [
     "local.whistlejs.com",
     "burp",
@@ -153,6 +168,13 @@ var DOMAIN_INCLUDES = [
 //Initialization Function
 function FindProxyForURL(url, host) {
     //These are my personal excludes just in case I accidently go to a login site with this proxy enabled
+
+    if (include(url.toLowerCase(), PROTOCOL_EXCLUDES)) {
+        return "DIRECT";
+    };
+    if (include(dnsResolve(host), IP_EXCLUDES)) {
+        return "DIRECT";
+    };
     var proxy = "PROXY xenos.nsupdate.info:8899";
     if (isInNet(myIpAddress(), "192.168.2.0", "255.255.255.0"))
         proxy = "PROXY 192.168.2.150:8899";
