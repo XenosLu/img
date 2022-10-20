@@ -149,11 +149,11 @@ function FindProxyForURL(url, host) {
             "static.zhihu.com", //zhihu
             "*.wxs.qq.com", //wechat
             "mp.weixin.qq.com", //wechat
-            // "192.168.2.150",
-            // "192.168.2.*",
         ];
     };
-
+    if (!isInNet(myIpAddress(), "192.168.2.0", "255.255.255.0") && shExpMatch(host, "192.168.2.*")) {
+        return "PROXY xenos.nsupdate.info:8899";
+    }
     if (include(host.toLowerCase(), domain_includes)) {
         return "PROXY xenos.nsupdate.info:8899";
     };
