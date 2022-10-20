@@ -149,6 +149,8 @@ function FindProxyForURL(url, host) {
             "static.zhihu.com",  //zhihu
             "*.wxs.qq.com",  //wechat
             "mp.weixin.qq.com",  //wechat
+            "192.168.2.150",
+            "192.168.2.*",
         ];
     };
 
