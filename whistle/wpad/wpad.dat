@@ -200,7 +200,7 @@ function FindProxyForURL(url, host) {
     };
     var proxy = "PROXY xenos.nsupdate.info:8899";
     if (isInNet(myIpAddress(), "192.168.2.0", "255.255.255.0"))
-        proxy = "PROXY 192.168.2.150:8899";
+        proxy = "PROXY 192.168.2.190:8899";
     else if (shExpMatch(host, "192.168.2.*"))
         return proxy;
     if (ENABLE_INCLUDES && include(host.toLowerCase(), DOMAIN_INCLUDES)) {
