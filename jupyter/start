@@ -1,5 +1,4 @@
 #!/bin/sh
-test -f /root/scripts/workspace_init.sh && sh /root/scripts/workspace_init.sh
 test -f /root/workspace_init.sh && sh /root/workspace_init.sh
 /usr/sbin/crond -L /var/log/crond
 jupyter lab --ip=0.0.0.0 --no-browser --allow-root &
