@@ -38,6 +38,8 @@ RUN ssh-keygen -A && \
     sed -i s/X11Forwarding.*/X11Forwarding\ yes/ /etc/ssh/sshd_config &&\
     sed -i s/AllowTcpForwarding.*/AllowTcpForwarding\ yes/ /etc/ssh/sshd_config &&\
     sed -i s/#\\?X11UseLocalhost.*/X11UseLocalhost\ no/ /etc/ssh/sshd_config &&\
+    sed -i s/#Port 22/Port 10222/ /etc/ssh/sshd_config &&\
+    echo "PubkeyAcceptedKeyTypes=+ssh-rsa" >> /etc/ssh/sshd_config &&\
 	echo StrictHostKeyChecking no>> /etc/ssh/ssh_config
 
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl &&\
@@ -63,4 +65,5 @@ RUN pip3 install --no-cache-dir openpyxl
 ADD start /
 
 EXPOSE 8888
+EXPOSE 10222
 CMD ["/bin/sh", "/start"]
