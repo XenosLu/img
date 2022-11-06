@@ -46,16 +46,16 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
     chmod +x ./kubectl &&\
     mv ./kubectl /usr/local/bin/kubectl
 
-COPY --from=xenocider/image:lrzsz-musl /lrzsz-musl-0.12.20.tar /lrzsz-musl-0.12.20.tar
+COPY --from=xenocider/img:lrzsz-musl /lrzsz-musl-0.12.20.tar /lrzsz-musl-0.12.20.tar
 RUN tar -C / -xvf /lrzsz-musl-0.12.20.tar &&\
     rm /lrzsz-musl-0.12.20.tar &&\
     ln -s /usr/local/bin/lrz /usr/bin/rz &&\
     ln -s /usr/local/bin/lsz /usr/bin/sz
 
-COPY --from=xenocider/image:wheel-jupyterlab /wheels /wheels
+COPY --from=xenocider/img:wheel-jupyterlab /wheels /wheels
 RUN pip3 install --no-cache-dir --no-index --find-links=/wheels jupyterlab
 
-COPY --from=xenocider/image:wheel-pandas /wheels /wheels
+COPY --from=xenocider/img:wheel-pandas /wheels /wheels
 RUN pip3 install --no-cache-dir --no-index --find-links=/wheels pandas
 
 RUN pip3 install --no-cache-dir openpyxl
