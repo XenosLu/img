@@ -1,5 +1,5 @@
 ### xenocider/container:jupyter ###
-FROM python:3.8.13-alpine3.15
+FROM python:3.11.0-alpine3.15
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
 ENV PS1 '\h:\w\$ '
