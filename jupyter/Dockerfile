@@ -15,7 +15,7 @@ RUN pip3 install wheel \
     pip3 wheel jupyterlab --wheel-dir=/wheels &&\
     pip3 wheel pandas --wheel-dir=/wheels &&\
     ls -l /wheels
-
+    
 FROM python:3.11.0-alpine3.15
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
@@ -72,7 +72,10 @@ COPY --from=base /wheels /wheels
 RUN pip3 install --no-cache-dir --no-index --find-links=/wheels jupyterlab
 RUN pip3 install --no-cache-dir --no-index --find-links=/wheels pandas
 
-RUN pip3 install --no-cache-dir openpyxl
+RUN pip3 install --no-cache-dir \
+                 openpyxl \
+                 dnspython \
+                 pyotp
 # RUN pip3 install dnspython
 # RUN pip3 install python-crontab
 
