@@ -1,5 +1,6 @@
 # xenocider/image:bullseye-workspace-base
-FROM python:3.10.8-slim-bullseye  # https://hub.docker.com/_/python
+FROM python:3.10.8-slim-bullseye
+# https://hub.docker.com/_/python
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 ENV LANG "C.UTF-8"
 ENV TZ 'Asia/Shanghai'
