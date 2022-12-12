@@ -1,4 +1,4 @@
-### xenocider/container:jupyter ###
+### xenocider/img:jupyter-wheel ###
 FROM python:3.11.0-alpine3.15
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
@@ -58,9 +58,10 @@ RUN pip3 install --no-cache-dir --no-index --find-links=/wheels jupyterlab
 COPY --from=xenocider/img:wheel-pandas /wheels /wheels
 RUN pip3 install --no-cache-dir --no-index --find-links=/wheels pandas
 
-RUN pip3 install --no-cache-dir openpyxl
-# RUN pip3 install dnspython
-# RUN pip3 install python-crontab
+RUN pip3 install --no-cache-dir \
+                 openpyxl \
+                 dnspython \
+                 pyotp
 
 ADD start /
 

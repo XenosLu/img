@@ -76,8 +76,6 @@ RUN pip3 install --no-cache-dir \
                  openpyxl \
                  dnspython \
                  pyotp
-# RUN pip3 install dnspython
-# RUN pip3 install python-crontab
 
 ADD start /
 
