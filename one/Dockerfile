@@ -1,4 +1,4 @@
-# xenocider/testone:latest
+# xenocider/img:one
 FROM python:3.8.16-alpine3.16
 # https://hub.docker.com/_/python
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
