@@ -12,5 +12,6 @@ fi
 
 ls -lh
 
+python3 -m xenoslib.onedrive login $*
 python3 -m xenoslib.onedrive upload . --folder "/media/upload"
 python3 -m xenoslib.onedrive logout
