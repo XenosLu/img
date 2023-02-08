@@ -1,1 +1,0 @@
-FROM xenocider/xapi:latest
