@@ -3,10 +3,14 @@ cd $(mktemp -d)
 
 python3 -m xenoslib.onedrive login $*
 
+taskpath="/media/upload/bin/task.sh"
+task=$(basename $taskpath)
+
 if [ "" == "$URL" ]
 then
-    python3 -m xenoslib.onedrive download "/media/upload/conf/task.sh"
-    sh task.sh
+    python3 -m xenoslib.onedrive download "$taskpath"
+    sh $task
+    rm $task
 else youtube-dl "$URL"
 fi
 
