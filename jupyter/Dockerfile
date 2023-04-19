@@ -1,4 +1,5 @@
-FROM python:3.11.0-alpine3.15 as base
+# https://hub.docker.com/_/python
+FROM python:3.11.3-alpine3.17 as base
 
 RUN apk add --no-cache \
             build-base \
@@ -16,7 +17,7 @@ RUN pip3 install wheel \
     pip3 wheel pandas --wheel-dir=/wheels &&\
     ls -l /wheels
     
-FROM python:3.11.0-alpine3.15
+FROM python:3.11.3-alpine3.17
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
 ENV PS1 '\h:\w\$ '
