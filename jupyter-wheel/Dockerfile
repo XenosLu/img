@@ -1,6 +1,6 @@
 ### xenocider/img:jupyter-wheel ###
 # https://hub.docker.com/_/python
-FROM python:3.11.0-alpine3.16 as base
+FROM python:3.11.3-alpine3.17
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
 ENV PS1 '\h:\w\$ '
