@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/python
-FROM python:3.11.3-alpine3.17 as base
+FROM python:3.11.2-alpine3.17 as base
 
 RUN apk add --no-cache \
             build-base \
