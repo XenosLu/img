@@ -7,6 +7,8 @@ RUN apk add --no-cache \
             libffi-dev \
             openssl-dev \
             libc-dev \
+            rust \
+            cargo \
             py3-pyzmq &&\
     rm -rf /root/.cache
 
