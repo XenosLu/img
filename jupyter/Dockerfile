@@ -2,14 +2,12 @@
 FROM python:3.10.11-alpine3.17 as base
 
 RUN apk add --no-cache \
-            build-base \
-            python3-dev \
+            g++ \
+            musl-dev \
             libffi-dev \
             openssl-dev \
-            libc-dev \
             rust \
-            cargo \
-            py3-pyzmq &&\
+            cargo &&\
     rm -rf /root/.cache
 
 RUN pip3 install wheel \
