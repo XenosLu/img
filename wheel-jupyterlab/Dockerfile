@@ -3,8 +3,6 @@ FROM python:3.11.3-alpine3.17
 
 RUN apk add --no-cache \
             cargo \
-            rust \
-            musl-dev \
             libffi-dev &&\
     rm -rf /root/.cache
 
