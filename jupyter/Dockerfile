@@ -3,10 +3,8 @@ FROM python:3.10.11-alpine3.17 as base
 
 RUN apk add --no-cache \
             g++ \
-            musl-dev \
             libffi-dev \
             openssl-dev \
-            rust \
             cargo &&\
     rm -rf /root/.cache
 
