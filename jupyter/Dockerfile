@@ -11,10 +11,9 @@ RUN apk add --no-cache \
     rm -rf /root/.cache
 
 RUN pip3 install wheel \
-                 setuptools \
-                 &&\
-    pip3 wheel jupyterlab --wheel-dir=/wheels &&\
-    pip3 wheel pandas --wheel-dir=/wheels &&\
+                 setuptools
+RUN pip3 wheel jupyterlab --wheel-dir=/wheels
+RUN pip3 wheel pandas --wheel-dir=/wheels &&\
     ls -l /wheels
     
 FROM python:3.10.11-alpine3.15
