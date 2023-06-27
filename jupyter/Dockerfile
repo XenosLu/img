@@ -39,6 +39,7 @@ RUN apk add --no-cache \
             rsync \
             miniupnpc \
             ffmpeg \
+            iptables \
             &&\
     apk add --no-cache \
             nodejs \
