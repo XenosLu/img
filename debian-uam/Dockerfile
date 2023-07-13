@@ -1,5 +1,5 @@
 # xenocider/container:ubuntu-uam
-FROM python:3.10.4-slim-bullseye
+FROM python:3.10.5-slim-bullseye
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 ENV LANG="C.UTF-8"
 COPY requirements.txt ./
