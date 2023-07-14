@@ -1,5 +1,6 @@
-# xenocider/container:ubuntu-uam
-FROM python:3.10.5-slim-bullseye
+# xenocider/img:ubuntu-uam
+# https://hub.docker.com/_/python
+FROM python:3.10-slim-bullseye
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 ENV LANG="C.UTF-8"
 COPY requirements.txt ./
