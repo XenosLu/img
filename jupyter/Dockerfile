@@ -61,6 +61,11 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
     chmod +x ./kubectl &&\
     mv ./kubectl /usr/local/bin/kubectl
 
+RUN wget https://github.com/mutagen-io/mutagen/releases/download/v0.16.6/mutagen_linux_amd64_v0.16.6.tar.gz &&\
+    tar zxvf mutagen_linux_amd64_v0.16.6.tar.gz mutagen &&\
+    chmod +x mutagen &&\
+    mv mutagen /usr/local/bin
+
 COPY --from=xenocider/img:lrzsz-musl /lrzsz-musl-0.12.20.tar /lrzsz-musl-0.12.20.tar
 RUN tar -C / -xvf /lrzsz-musl-0.12.20.tar &&\
     rm /lrzsz-musl-0.12.20.tar &&\
