@@ -16,7 +16,7 @@ RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&\
 
 RUN curl -fsSL https://ollama.com/install.sh | sh
 # RUN curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz &&\
-    tar -C /usr -xzf ollama-linux-amd64.tgz
+#    tar -C /usr -xzf ollama-linux-amd64.tgz
 # RUN ollama pull wizardlm-uncensored:13b-llama2-q4_K_S
 # RUN ollama pull deepseek-coder:1.3b
 # RUN ollama pull tinyllama:1.1b
