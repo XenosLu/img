@@ -1,19 +1,4 @@
 # https://hub.docker.com/_/python
-FROM python:3.10.11-alpine3.17 as base
-
-RUN apk add --no-cache \
-            g++ \
-            libffi-dev \
-            openssl-dev \
-            cargo &&\
-    rm -rf /root/.cache
-
-RUN pip3 install wheel \
-                 setuptools
-RUN pip3 wheel jupyterlab --wheel-dir=/wheels
-RUN pip3 wheel pandas --wheel-dir=/wheels &&\
-    ls -l /wheels
-    
 FROM python:3.10.11-alpine3.17
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
@@ -31,8 +16,8 @@ RUN apk add --no-cache \
             git \
             vim \
             tree \
-            tmux
-            &&\
+            tmux \
+            && \
     rm -rf /root/.cache
 
 RUN curl -fsSL https://ollama.com/install.sh | sh
