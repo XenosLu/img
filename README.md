@@ -13,6 +13,10 @@
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:lrzsz-musl
 - xenocider/img:mldonkey
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:mldonkey
+- xenocider/img:ollama-deb
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:ollama-deb
+- xenocider/img:ollama-off
+- registry.cn-shanghai.aliyuncs.com/xenocider/img:ollama-off
 - xenocider/img:ollama
 - registry.cn-shanghai.aliyuncs.com/xenocider/img:ollama
 - xenocider/img:one
