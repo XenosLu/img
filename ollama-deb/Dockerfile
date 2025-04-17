@@ -12,7 +12,7 @@ RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&\
                        gnupg \
                        g++ \
                        &&\
-    pip3 install pip --upgrade &&\
+    pip3 install pip --upgrade
 
 RUN curl -fsSL https://ollama.com/install.sh | sh
 # RUN curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz &&\
