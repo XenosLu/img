@@ -15,6 +15,7 @@ RUN apk add --no-cache \
             yarn &&\
     rm -rf /root/.cache &&\
     yarn global add whistle
+# yarn global add whistle@2.9.35
 
 
 EXPOSE 8899
