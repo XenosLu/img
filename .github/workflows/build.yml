@@ -51,4 +51,5 @@ jobs:
           docker push ${{ env.registry }}/${IMAGE_NAME} || \
           docker push ${{ env.registry }}/${IMAGE_NAME}
           docker logout ${{ env.registry }}
+          curl -X POST -H "Content-type: application/json" --data "{\"text\":\"${{ env.registry }}/${IMAGE_NAME} published\"}" ${{ secrets.WEBHOOK }}
           fg || echo
