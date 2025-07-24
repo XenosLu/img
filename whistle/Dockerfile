@@ -14,6 +14,7 @@ RUN apk add --no-cache \
             nodejs \
             yarn &&\
     rm -rf /root/.cache &&\
+    rm -rf /tmp/* &&\
     yarn global add whistle
 # yarn global add whistle@2.9.35
 
