@@ -9,6 +9,8 @@ on:
     secrets:
       DOCKERHUB_TOKEN:
         required: true
+      WEBHOOK:
+        required: true
 
 jobs:
 
