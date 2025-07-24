@@ -20,3 +20,4 @@ jobs:
       username: xenocider
     secrets:
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      WEBHOOK : ${{ secrets.WEBHOOK  }}
