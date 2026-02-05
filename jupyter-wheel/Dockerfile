@@ -1,5 +1,5 @@
 ### xenocider/img:jupyter-wheel ###
-# https://hub.docker.com/_/python
+# https://hub.docker.com/_/python # update wheels
 FROM python:3.12-alpine3.22
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
