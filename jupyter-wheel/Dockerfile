@@ -68,7 +68,9 @@ RUN pip3 install --no-cache-dir --no-index --find-links=/wheels pandas
 RUN pip3 install --no-cache-dir \
                  openpyxl \
                  dnspython \
-                 pyotp
+                 pyotp \
+                 PyYAML \
+                 IMAPClient
 
 ADD start /
 
