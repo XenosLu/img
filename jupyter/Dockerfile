@@ -13,7 +13,7 @@ RUN pip3 install wheel \
 RUN pip3 wheel jupyterlab --wheel-dir=/wheels
 RUN pip3 wheel pandas --wheel-dir=/wheels &&\
     ls -l /wheels
-    
+
 FROM python:3.12-alpine3.22
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
@@ -65,6 +65,10 @@ RUN wget https://github.com/mutagen-io/mutagen/releases/download/v0.16.6/mutagen
     tar zxvf mutagen_linux_amd64_v0.16.6.tar.gz mutagen &&\
     chmod +x mutagen &&\
     mv mutagen /usr/local/bin
+
+# RUN apk add --no-cache libstdc++ libgcc curl
+RUN curl -LsSf https://github.com/EDM115/unrar-alpine/releases/latest/download/unrar -o /usr/local/bin/unrar && \
+    chmod +x /usr/local/bin/unrar
 
 COPY --from=xenocider/img:lrzsz-musl /lrzsz-musl-0.12.20.tar /lrzsz-musl-0.12.20.tar
 RUN tar -C / -xvf /lrzsz-musl-0.12.20.tar &&\
